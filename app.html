@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="QuizPulse 360 delivers GK, current affairs, and competitive exam insights with automated AI publishing, SEO optimization, and growth-ready monetization.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuizPulse 360 | GK, Current Affairs & Exam Intelligence</title>
+    <style>
+        :root {
+            --bg: #f5f6fb;
+            --surface: #ffffff;
+            --text: #1f2a37;
+            --muted: #5b6472;
+            --primary: #4f46e5;
+            --primary-dark: #3730a3;
+            --accent: #22d3ee;
+            --border: #e2e8f0;
+            --card-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+        }
+        body.dark {
+            --bg: #0f172a;
+            --surface: #14203a;
+            --text: #f8fafc;
+            --muted: #cbd5f5;
+            --border: #1f2d4d;
+            --card-shadow: 0 15px 35px rgba(2, 6, 23, 0.55);
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: 'Inter', Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            transition: background 0.3s, color 0.3s;
+        }
+        img { max-width: 100%; display: block; }
+        a { color: inherit; text-decoration: none; }
+        button {
+            cursor: pointer;
+            border: none;
+            background: none;
+            font: inherit;
+        }
+        .ticker {
+            background: #f97316;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            overflow: hidden;
+        }
+        .ticker span {
+            font-weight: 600;
+        }
+        .ticker p {
+            margin: 0;
+            animation: slide 15s linear infinite;
+            white-space: nowrap;
+        }
+        @keyframes slide {
+            from { transform: translateX(100%); }
+            to { transform: translateX(-100%); }
+        }
+        header {
+            background: var(--surface);
+            box-shadow: var(--card-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .logo {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+        .logo small {
+            font-size: 0.75rem;
+            color: var(--muted);
+        }
+        nav {
+            display: flex;
+            gap: 0.75rem;
+            flex: 1;
+            flex-wrap: wrap;
+        }
+        nav a {
+            padding: 0.35rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.9rem;
+            color: var(--muted);
+            transition: background 0.2s, color 0.2s;
+        }
+        nav a.active {
+            background: rgba(79, 70, 229, 0.12);
+            color: var(--primary);
+        }
+        .search-box {
+            flex: 1;
+            min-width: 200px;
+            max-width: 320px;
+            background: var(--bg);
+            border-radius: 999px;
+            padding: 0.35rem 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .search-box input {
+            border: none;
+            background: transparent;
+            width: 100%;
+            color: var(--text);
+            outline: none;
+        }
+        .header-actions {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+        .pill-btn {
+            padding: 0.45rem 1rem;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            font-weight: 600;
+        }
+        .pill-btn.primary {
+            background: var(--primary);
+            color: #fff;
+            border-color: transparent;
+        }
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.25rem;
+        }
+        .hero {
+            background: linear-gradient(135deg, #4f46e5, #22d3ee);
+            color: #fff;
+            border-radius: 24px;
+            padding: 2rem;
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            box-shadow: var(--card-shadow);
+        }
+        .hero h1 {
+            margin: 0;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+        }
+        .hero p {
+            margin: 0.5rem 0 1rem;
+            color: rgba(255,255,255,0.9);
+        }
+        .hero ul {
+            margin: 0;
+            padding-left: 1.1rem;
+            color: rgba(255,255,255,0.85);
+        }
+        .hero ul li { margin-bottom: 0.35rem; }
+        .hero-card {
+            background: rgba(255,255,255,0.12);
+            border-radius: 18px;
+            padding: 1.25rem;
+        }
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        .stat-card {
+            background: var(--surface);
+            border-radius: 18px;
+            padding: 1rem 1.25rem;
+            box-shadow: var(--card-shadow);
+        }
+        .stat-card h4 {
+            margin: 0;
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+        .stat-card strong {
+            font-size: 1.5rem;
+            display: block;
+            margin-top: 0.35rem;
+        }
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+       
+        }
+        .filters button {
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            padding: 0.45rem 1rem;
+            color: var(--muted);
+            transition: background 0.2s, color 0.2s;
+        }
+        .filters button.active {
+            background: var(--primary);
+            color: #fff;
+            border-color: transparent;
+        }
+        .content-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr);
+            gap: 1.5rem;
+        }
+        @media (max-width: 900px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .articles {
+            display: grid;
+            gap: 1rem;
+        }
+        .article-card {
+            background: var(--surface);
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: var(--card-shadow);
+            display: grid;
+            gap: 0.75rem;
+        }
+        .article-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            background: rgba(79,70,229,0.1);
+            color: var(--primary);
+            font-size: 0.85rem;
+        }
+        .article-card h3 {
+            margin: 0;
+            font-size: 1.3rem;
+        }
+        .article-card p {
+            margin: 0;
+            color: var(--muted);
+        }
+        .article-foot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .article-foot button {
+            border-radius: 12px;
+            padding: 0.6rem 1.2rem;
+            background: rgba(79, 70, 229, 0.1);
+            color: var(--primary);
+            font-weight: 600;
+        }
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .widget {
+            background: var(--surface);
+            border-radius: 20px;
+            padding: 1.25rem;
+            box-shadow: var(--card-shadow);
+        }
+        .widget h4 {
+            margin-top: 0;
+        }
+        .trending-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            gap: 1rem;
+        }
+        .trending-item {
+            display: flex;
+            gap: 0.75rem;
+            align-items: flex-start;
+        }
+        .trending-item span {
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .newsletter form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        .newsletter input {
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            padding: 0.65rem 0.75rem;
+            background: transparent;
+            color: var(--text);
+        }
+        .newsletter button {
+            border-radius: 12px;
+            padding: 0.65rem 0.75rem;
+            background: var(--primary);
+            color: #fff;
+        }
+        .adsense-slot {
+            border: 2px dashed var(--border);
+            padding: 1.5rem;
+            border-radius: 16px;
+            text-align: center;
+            color: var(--muted);
+        }
+        .affiliate-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(160px,1fr));
+            gap: 0.75rem;
+        }
+        .affiliate-card {
+            border: 1px dashed var(--border);
+            border-radius: 16px;
+            padding: 0.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+        .affiliate-card strong {
+            font-size: 1.1rem;
+        }
+        .affiliate-card button {
+            margin-top: auto;
+            border-radius: 10px;
+            background: rgba(79, 70, 229, 0.1);
+            color: var(--primary);
+            padding: 0.5rem;
+        }
+        .section-title {
+            margin: 3rem 0 1rem;
+            font-size: 1.5rem;
+        }
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+            gap: 1rem;
+        }
+        .tech-card {
+            background: var(--surface);
+            border-radius: 18px;
+            padding: 1.25rem;
+            box-shadow: var(--card-shadow);
+        }
+        .timeline {
+            display: grid;
+            gap: 0.75rem;
+        }
+        .timeline-item {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 1rem;
+            border-left: 4px solid var(--primary);
+        }
+        footer {
+            margin-top: 3rem;
+            padding: 2rem 1.25rem;
+            background: var(--surface);
+            box-shadow: var(--card-shadow);
+        }
+        footer .foot-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+        }
+        footer p {
+            margin: 0.25rem 0;
+            color: var(--muted);
+        }
+        .admin-panel {
+            position: fixed;
+            top: 0;
+            right: -380px;
+            width: 360px;
+            height: 100vh;
+            background: var(--surface);
+            box-shadow: -10px 0 30px rgba(15, 23, 42, 0.2);
+            transition: right 0.3s;
+            padding: 1.5rem;
+            overflow-y: auto;
+            z-index: 100;
+        }
+        .admin-panel.open {
+            right: 0;
+        }
+        .admin-panel h3 {
+            margin-top: 0;
+        }
+        .admin-panel label {
+            display: block;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+        .admin-panel input, .admin-panel select, .admin-panel textarea {
+            width: 100%;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            padding: 0.5rem;
+            margin-top: 0.35rem;
+            background: transparent;
+            color: var(--text);
+            font-family: inherit;
+        }
+        .admin-panel button.primary {
+            width: 100%;
+            margin-top: 1rem;
+            padding: 0.65rem;
+        }
+        .toast {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(120%);
+            background: var(--text);
+            color: var(--bg);
+            padding: 0.75rem 1.25rem;
+            border-radius: 999px;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s;
+            z-index: 200;
+        }
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="ticker">
+        <span>Breaking:</span>
+        <p>Solar-powered metro tests live in Delhi • UPSC calendar 2026 out with key reforms • ISRO confirms reusable launch tests in July • RBI digital rupee pilot expands to rural banks</p>
+    </div>
+    <header>
+        <div class="header-inner">
+            <div class="logo">
+                QuizPulse 360
+                <small>Suggested domain: QuizPulse360.com</small>
+            </div>
+            <nav id="navLinks"></nav>
+            <div class="search-box">
+                🔍
+                <input id="searchInput" type="search" placeholder="Search GK, UPSC, NDA, SSC..." />
+            </div>
+            <div class="header-actions">
+                <button class="pill-btn" id="themeToggle">🌙</button>
+                <button class="pill-btn primary" id="adminToggle">Admin</button>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section class="hero">
+            <div>
+                <h1>Human-grade GK & Exam Intelligence on Autopilot</h1>
+                <p>QuizPulse 360 blends AI-assisted drafting with manual approvals so every update feels handcrafted for aspirants, not robots.</p>
+                <ul>
+                    <li>AI pulls live Google Trends + premium news APIs</li>
+                    <li>Natural rewrites with examples, FAQs, internal links</li>
+                    <li>SEO layer: schema, title optimization, fast-lane CDN</li>
+                </ul>
+                <button class="pill-btn primary" id="notifyBtn">Enable Smart Alerts</button>
+            </div>
+            <div class="hero-card">
+                <h3>Automation Snapshot</h3>
+                <p><strong>7</strong> categories syncing hourly</p>
+                <p><strong>10</strong> AI drafts waiting for approval</p>
+                <p><strong>2.1s</strong> average page load (Core Web Vitals ready)</p>
+                <p>Manual override available anytime via Admin hub.</p>
+            </div>
+        </section>
+
+        <div class="stats-row">
+            <div class="stat-card">
+                <h4>Daily Fresh Posts</h4>
+                <strong id="statPosts">0</strong>
+                <small>Auto queue: 5–10/day across GK, News, Education.</small>
+            </div>
+            <div class="stat-card">
+                <h4>Monetization</h4>
+                <strong id="statRevenue">$0</strong>
+                <small>Adsense + Affiliate + Newsletter funnel.</small>
+            </div>
+            <div class="stat-card">
+                <h4>Latency</h4>
+                <strong>1.94s</strong>
+                <small>Optimized via CDN & lazy modules.</small>
+            </div>
+            <div class="stat-card">
+                <h4>Trust Signals</h4>
+                <strong>95%</strong>
+                <small>Humanizing tactics beat AI detectors.</small>
+            </div>
+        </div>
+
+        <div class="filters" id="categoryFilters"></div>
+
+        <div class="content-grid">
+            <section class="articles" id="articleList"></section>
+            <aside class="sidebar">
+                <div class="widget">
+                    <h4>Trending now</h4>
+                    <ul class="trending-list" id="trendingList"></ul>
+                </div>
+                <div class="widget newsletter">
+                    <h4>Daily 7 AM Briefing</h4>
+                    <p>Get GK facts + exam capsules in one crisp email.</p>
+                    <form id="newsletterForm">
+                        <input type="email" placeholder="Email address" required>
+                        <button type="submit">Subscribe & Learn</button>
+                    </form>
+                </div>
+                <div class="widget">
+                    <h4>Automation Log</h4>
+                    <div id="automationLog"></div>
+                </div>
+                <div class="widget adsense-slot">
+                    <strong>AdSense Smart Banner</strong>
+                    <p>Responsive slot 336×280</p>
+                </div>
+                <div class="widget">
+                    <h4>Affiliate Picks</h4>
+                    <div class="affiliate-grid" id="affiliateGrid"></div>
+                </div>
+            </aside>
+        </div>
+
+        <section>
+            <h2 class="section-title">Recommended Tech Stack</h2>
+            <div class="tech-stack">
+                <div class="tech-card">
+                    <h3>WordPress + AI Plugins</h3>
+                    <p>Use Elementor + RankMath + Bertha AI for rapid CMS content with manual approvals.</p>
+                    <ul>
+                        <li>Woo-friendly monetization</li>
+                        <li>Auto sitemap & schema</li>
+                        <li>One-click category management</li>
+                    </ul>
+                </div>
+                <div class="tech-card">
+                    <h3>Next.js + OpenAI API</h3>
+                    <p>Headless publishing with ISR, custom AI workflows, and fine control over tone.</p>
+                    <ul>
+                        <li>Server actions for scheduling</li>
+                        <li>Vercel Edge caching</li>
+                        <li>Webhook auto-sharing</li>
+                    </ul>
+                </div>
+                <div class="tech-card">
+                    <h3>Hybrid Trigger</h3>
+                    <p>Pipe Google Trends → Zapier → Notion for editorial review, then auto-publish.</p>
+                    <ul>
+                        <li>Semi-automatic approvals</li>
+                        <li>Centralized fact bank</li>
+                        <li>Audit-ready change logs</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">Scheduling & Growth Timeline</h2>
+            <div class="timeline" id="timeline"></div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="foot-inner">
+            <div>
+                <h4>QuizPulse 360</h4>
+                <p>SSL enforced • CDN ready • Anti-spam firewall enabled.</p>
+                <p>Push-ready using service worker hooks.</p>
+            </div>
+            <div>
+                <h4>Quick Links</h4>
+                <p>Advertise with us</p>
+                <p>AI Content Playbook</p>
+                <p>Editorial Standards</p>
+            </div>
+            <div>
+                <h4>Growth Stack</h4>
+                <p>Auto social sharing (X, LinkedIn, Telegram)</p>
+                <p>Internal linking engine</p>
+                <p>Related posts widget</p>
+            </div>
+            <div>
+                <h4>Contact</h4>
+                <p>hello@quizpulse360.com</p>
+                <p>Push Alerts: /notifications</p>
+                <p>Careers: /join-team</p>
+            </div>
+        </div>
+        <p style="text-align:center; margin-top:1.5rem; color:var(--muted);">© 2026 QuizPulse 360. Built for students, hustlers, and policy nerds.</p>
+    </footer>
+
+    <aside class="admin-panel" id="adminPanel">
+        <h3>Automation Console</h3>
+        <label>Accent color</label>
+        <input type="color" id="colorPicker" value="#4f46e5">
+        <label>Add category</label>
+        <input type="text" id="newCategoryInput" placeholder="e.g., Defense Updates">
+        <button class="pill-btn primary" id="addCategoryBtn">Add Category</button>
+        <label>Draft headline</label>
+        <input type="text" id="draftTitle" placeholder="UPSC Prelims 2026: NCERT Priority List">
+        <label>Summary</label>
+        <textarea id="draftSummary" rows="3" placeholder="Key points, tone hints, sources…"></textarea>
+        <button class="pill-btn primary" id="generateBtn">AI Draft & Queue</button>
+        <div style="margin-top:1.5rem;">
+            <h4>SEO Quick Toggles</h4>
+            <label><input type="checkbox" id="schemaToggle" checked> Article schema</label>
+            <label><input type="checkbox" id="sitemapToggle" checked> Auto sitemap ping</label>
+            <label><input type="checkbox" id="internalLinkToggle" checked> Smart internal links</label>
+        </div>
+        <div style="margin-top:1.5rem;">
+            <h4>Monetization Mix</h4>
+            <p>AdSense RPM: <strong>$3.8</strong></p>
+            <p>Affiliate CR: <strong>2.4%</strong></p>
+            <p>Newsletter CTR: <strong>11%</strong></p>
+        </div>
+        <div style="margin-top:1.5rem;">
+            <h4>Security</h4>
+            <ul style="margin:0; padding-left:1.1rem;">
+                <li>SSL auto-renew active</li>
+                <li>Spam shield rate limiting</li>
+                <li>CDN firewall (Asia edge)</li>
+            </ul>
+        </div>
+    </aside>
+
+    <div class="toast" id="toast">Saved</div>
+
+    <script>
+        const config = {
+            categories: [
+                { id: 'all', label: 'All' },
+                { id: 'gk', label: 'General Knowledge' },
+                { id: 'news', label: 'Latest News' },
+                { id: 'education', label: 'Education' },
+                { id: 'technology', label: 'Technology' },
+                { id: 'business', label: 'Business' },
+                { id: 'trending', label: 'Trending News' }
+            ],
+            posts: [
+                {
+                    id: 1,
+                    title: "NDA 2026: 90-Day Game Plan to Clear Maths & GAT Together",
+                    category: "education",
+                    tags: ["NDA", "Strategy", "Defense"],
+                    summary: "A practical bootcamp schedule that blends PYQ drills, spaced revision, and field-ready current affairs capsules.",
+                    content: [
+                        "Week 1–4 focus on regaining concept muscle: arithmetic in the morning, trigonometry in the evening, and a Sunday full-syllabus quiz. Every wrong answer is logged with a 30-word reflection—this keeps AI rewrites sounding human.",
+                        "To keep GAT from becoming theory heavy, add one real-world connection daily. Example: while studying climates, relate it to Agni-5 logistics in high-altitude zones. It sticks far better than rote charts.",
+                        "FAQs we keep receiving: Can you clear NDA without coaching? Yes, provided you clock 3 mocks/week and simulate the SSB situation diary. Internal links: see our ‘UPSC to NDA overlap guide’ and ‘SSB psychology sampler’ below."
+                    ],
+                    faqs: [
+                        { q: "How many mocks per week?", a: "Three timed papers plus one SSB drill for narrative writing." },
+                        { q: "Best time for revision?", a: "16 hours after initial learning; our automation engine schedules that reminder." }
+                    ],
+                    views: 2480,
+                    minutes: 6,
+                    date: "2026-03-16",
+                    internalLinks: ["UPSC Ethics Framework", "GK: Indian Ocean Chokepoints"]
+                },
+                {
+                    id: 2,
+                    title: "GK Deep Dive: Why Indian Ocean Chokepoints Decide 2026 Trade Routes",
+                    category: "gk",
+                    tags: ["GK", "Geopolitics"],
+                    summary: "From Malacca to Hormuz, here’s how geography textbooks meet real shipping manifests.",
+                    content: [
+                        "India’s latest Logistics Ease Across Different States report shows Gujarat and Tamil Nadu sprinting ahead because their ports connect directly to the Malacca funnel. That real data is what examiners expect when they say 'applied GK'.",
+                        "Example hook for answers: “While the atlas labels the Bab-el-Mandeb as a narrow strait, in 2024 the Houthi blockade spiked global insurance premiums by 400%. That context fetches you the extra UPSC Main marks.”",
+                        "Add this to your notes: draft answers with the CAR format (Context, Analysis, Recommendation). Our automation workflow rewrites raw feeds using the same structure so the output sounds like a seasoned mentor instead of a bot."
+                    ],
+                    faqs: [
+                        { q: "Is Hormuz still volatile?", a: "Yes, Iranian patrols continue to shadow LNG carriers; mention it in 2026 essays." },
+                        { q: "How to memorize straits?", a: "Chunk them by purpose—energy, trade, defense—and revisit using spaced flashcards." }
+                    ],
+                    views: 3120,
+                    minutes: 5,
+                    date: "2026-03-15",
+                    internalLinks: ["Trending: Solar Metro Pilot", "Business: Port-led Growth"]
+                },
+                {
+                    id: 3,
+                    title: "UPSC Ethics 2026: Real Caselets from Municipal Corporations",
+                    category: "education",
+                    tags: ["UPSC", "Ethics"],
+                    summary: "Five city-level dilemmas rewritten in conversational Hindi-English to mirror actual DAF interviews.",
+                    content: [
+                        "Caselet #1 covers a Bengaluru ward officer asked to fast-track lake encroachment clearance. We show how to frame your answer with empathy + rulebook, not moral grandstanding.",
+                        "Pro tip: mention at least one local initiative. For example, cite Indore’s bio-CNG buses when talking about waste-to-wealth; it proves you read beyond PDFs.",
+                        "Internal linking suggestion: connect this ethics piece to our ‘SSC to UPSC transition’ guide so readers stay inside the ecosystem."
+                    ],
+                    faqs: [
+                        { q: "Do examples need citations?", a: "Short references are enough: city name + year + outcome." }
+                    ],
+                    views: 1980,
+                    minutes: 4,
+                    date: "2026-03-14",
+                    internalLinks: ["SSC Strategy Deck", "GK Deep Dive"]
+                },
+                {
+                    id: 4,
+                    title: "India + World: Semiconductor Corridor Makes Its First Shipment",
+                    category: "news",
+                    tags: ["Economy", "Technology"],
+                    summary: "Why the Surat–Bengaluru ‘silicon spine’ matters for UPSC, MBA GDs, and every tech investor tracking supply chains.",
+                    content: [
+                        "The first batch of lithography-grade wafers has left Dholera. Instead of quoting press releases, our AI engine looked at customs filings to build a human-like narrative around labour skilling and state incentives.",
+                        "Opinion angle: “This corridor may finally let India negotiate tech-sharing clauses from a position of leverage.” Always add one balanced viewpoint—it dodges AI detection because it sounds like you.",
+                        "Internal links: see ‘Tech: AI Tutors for SSC’ and ‘Business: Logistics Tax Credits’. It’s automated via our graph database."
+                    ],
+                    faqs: [
+                        { q: "What exams cover this?", a: "UPSC GS3, RBI Grade B, CAT GD-PI, engineering placement essays." }
+                    ],
+                    views: 4275,
+                    minutes: 6,
+                    date: "2026-03-17",
+                    internalLinks: ["Tech Tutors", "Business Incentives"]
+                },
+                {
+                    id: 5,
+                    title: "Trending: Solar Metro Pilot Could Slash Delhi NCR Commute Costs",
+                    category: "trending",
+                    tags: ["Urban", "Sustainability"],
+                    summary: "DMRC’s 25 MW pilot explains renewables better than any dry theory paragraph—here’s how to use it in essays.",
+                    content: [
+                        "Instead of quoting wattage, tell the story: panels on depots feed regenerative braking, cutting the grid load by 18%. That sentence feels alive—and that’s our anti-detection strategy.",
+                        "Students prepping for NDA/SSB can cite it as proof of India’s logistics self-reliance. Commerce aspirants can build a quick NPV case. We cover both angles in the article.",
+                        "Auto-linked resources: ‘GK: Indian Ocean’ (energy shipments) and ‘Education: NDA 90-Day Plan’ (situation reaction test idea)."
+                    ],
+                    faqs: [
+                        { q: "Is it exam relevant?", a: "Yes—ESG questions, essay leads, interview icebreakers." }
+                    ],
+                    views: 2895,
+                    minutes: 3,
+                    date: "2026-03-17",
+                    internalLinks: ["NDA Plan", "GK Deep Dive"]
+                }
+            ],
+            affiliates: [
+                { name: "Lucent GK 2026", price: "₹399", perk: "Flat 12% via Amazon", cat: "GK" },
+                { name: "UPSC Ethics Workbook", price: "₹549", perk: "Flipkart 10%", cat: "Education" },
+                { name: "SSC Quant Live Pack", price: "₹1,299", perk: "Partner LMS", cat: "Education" }
+            ],
+            timeline: [
+                { time: "05:30 IST", task: "AI fetches overnight Google Trends + PIB briefs" },
+                { time: "08:00 IST", task: "Editor reviews semi-automatic drafts, adds human anecdotes" },
+                { time: "11:30 IST", task: "Auto internal linking + schema injection" },
+                { time: "14:00 IST", task: "Peak-time publishing & auto social share" },
+                { time: "18:30 IST", task: "Old content refresh (facts verified, tone checked)" }
+            ]
+        };
+
+        const state = {
+            currentCategory: 'all'
+        };
+
+        const navLinks = document.getElementById('navLinks');
+        const filters = document.getElementById('categoryFilters');
+        const articleList = document.getElementById('articleList');
+        const trendingList = document.getElementById('trendingList');
+        const automationLog = document.getElementById('automationLog');
+        const affiliateGrid = document.getElementById('affiliateGrid');
+        const timelineEl = document.getElementById('timeline');
+        const toast = document.getElementById('toast');
+
+        function renderNav() {
+            navLinks.innerHTML = '';
+            config.categories.forEach(cat => {
+                const link = document.createElement('a');
+                link.href = '#';
+                link.textContent = cat.label;
+                link.dataset.category = cat.id;
+                link.classList.toggle('active', state.currentCategory === cat.id);
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    state.currentCategory = cat.id;
+                    updateCategoryActive();
+                    renderArticles();
+                    stylishToast(`Loaded ${cat.label} stories`);
+                });
+                navLinks.appendChild(link);
+            });
+        }
+
+        function updateCategoryActive() {
+            document.querySelectorAll('nav a, .filters button').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.category === state.currentCategory);
+            });
+        }
+
+        function renderFilters() {
+            filters.innerHTML = '';
+            config.categories.forEach(cat => {
+                const btn = document.createElement('button');
+                btn.textContent = cat.label;
+                btn.dataset.category = cat.id;
+                btn.classList.toggle('active', state.currentCategory === cat.id);
+                btn.addEventListener('click', () => {
+                    state.currentCategory = cat.id;
+                    updateCategoryActive();
+                    renderArticles();
+                });
+                filters.appendChild(btn);
+            });
+        }
+
+        function renderArticles() {
+            const posts = config.posts.filter(post => state.currentCategory === 'all' || post.category === state.currentCategory);
+            articleList.innerHTML = '';
+            posts.forEach(post => {
+                const card = document.createElement('article');
+                card.className = 'article-card';
+                const badge = `<span class="badge">📚 ${post.category.toUpperCase()}</span>`;
+                const meta = `<div class="article-meta"><span>${post.minutes} min read</span><span>${post.views.toLocaleString()} views</span><span>${post.date}</span></div>`;
+                const contentPreview = post.content.slice(0, 2).map(p => `<p>${p}</p>`).join('');
+                const internalLinks = post.internalLinks.map(link => `<a href="#" style="color:var(--accent); font-size:0.85rem;">${link}</a>`).join(' • ');
+                const faq = post.faqs && post.faqs.length
+                    ? `<details><summary>FAQs</summary>${post.faqs.map(item => `<p><strong>${item.q}</strong><br>${item.a}</p>`).join('')}</details>`
+                    : '';
+                card.innerHTML = `
+                    ${badge}
+                    <h3>${post.title}</h3>
+                    <p>${post.summary}</p>
+                    ${contentPreview}
+                    <div style="font-size:0.85rem; color:var(--muted);">${internalLinks}</div>
+                    ${faq}
+                    ${meta}
+                    <div class="article-foot">
+                        <button onclick="stylishToast('Opening full article...')">Read more</button>
+                        <button onclick="stylishToast('Related articles queued')">Related</button>
+                    </div>
+                `;
+                articleList.appendChild(card);
+            });
+            document.getElementById('statPosts').textContent = posts.length.toString().padStart(2,'0');
+        }
+
+        function renderTrending() {
+            const topPosts = [...config.posts].sort((a,b) => b.views - a.views).slice(0,4);
+            trendingList.innerHTML = '';
+            topPosts.forEach((post, idx) => {
+                const li = document.createElement('li');
+                li.className = 'trending-item';
+                li.innerHTML = `<span>#${idx+1}</span><div><strong>${post.title}</strong><p>${post.summary.substring(0,80)}...</p></div>`;
+                trendingList.appendChild(li);
+            });
+        }
+
+        function renderLog() {
+            const items = [
+                "AI fetched PIB + PRS topics • 05:20 IST",
+                "Tone rewrites completed for GK & Education • 07:45 IST",
+                "Manual approvals pending (3 drafts) • 09:15 IST",
+                "Internal linking map refreshed • 12:10 IST"
+            ];
+            automationLog.innerHTML = items.map(text => `<p style="margin:0 0 0.5rem;">${text}</p>`).join('');
+        }
+
+        function renderAffiliates() {
+            affiliateGrid.innerHTML = '';
+            config.affiliates.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'affiliate-card';
+                card.innerHTML = `
+                    <strong>${item.name}</strong>
+                    <p>${item.price}</p>
+                    <small>${item.perk}</small>
+                    <button onclick="stylishToast('Affiliate link copied')">Promote</button>
+                `;
+                affiliateGrid.appendChild(card);
+            });
+        }
+
+        function renderTimeline() {
+            timelineEl.innerHTML = config.timeline.map(slot => `<div class="timeline-item"><strong>${slot.time}</strong><p>${slot.task}</p></div>`).join('');
+        }
+
+        function stylishToast(message) {
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
+        }
+
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            const value = e.target.value.toLowerCase();
+            config.posts = config.posts.sort((a,b) => a.title.localeCompare(b.title));
+            const filtered = config.posts.filter(post => post.title.toLowerCase().includes(value) || post.summary.toLowerCase().includes(value));
+            if (value) {
+                articleList.innerHTML = '';
+                filtered.forEach(post => {
+                    const card = document.createElement('article');
+                    card.className = 'article-card';
+                    card.innerHTML = `<span class="badge">${post.category}</span><h3>${post.title}</h3><p>${post.summary}</p>`;
+                    articleList.appendChild(card);
+                });
+            } else {
+                renderArticles();
+            }
+        });
+
+        document.getElementById('newsletterForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            e.target.reset();
+            stylishToast('Subscribed! Check your inbox tomorrow 7 AM.');
+        });
+
+        document.getElementById('themeToggle').addEventListener('click', () => {
+            document.body.classList.toggle('dark');
+            stylishToast(document.body.classList.contains('dark') ? 'Dark mode engaged' : 'Light mode engaged');
+        });
+
+        document.getElementById('notifyBtn').addEventListener('click', () => {
+            stylishToast('Push notifications armed! 🔔');
+        });
+
+        const adminPanel = document.getElementById('adminPanel');
+        document.getElementById('adminToggle').addEventListener('click', () => {
+            adminPanel.classList.toggle('open');
+        });
+
+        document.getElementById('colorPicker').addEventListener('input', (e) => {
+            document.documentElement.style.setProperty('--primary', e.target.value);
+            stylishToast('Accent color updated');
+        });
+
+        document.getElementById('addCategoryBtn').addEventListener('click', () => {
+            const value = document.getElementById('newCategoryInput').value.trim();
+            if (!value) return;
+            const id = value.toLowerCase().replace(/\s+/g,'-');
+            config.categories.push({ id, label: value });
+            renderNav();
+            renderFilters();
+            document.getElementById('newCategoryInput').value = '';
+            stylishToast(`${value} category added`);
+        });
+
+        document.getElementById('generateBtn').addEventListener('click', () => {
+            const title = document.getElementById('draftTitle').value || 'AI Draft: Competitive Insights';
+            const summary = document.getElementById('draftSummary').value || 'Automation drafted a fresh perspective with examples and FAQs.';
+            config.posts.unshift({
+                id: Date.now(),
+                title,
+                category: "education",
+                tags: ["Draft"],
+                summary,
+                content: ["Human editor review pending for nuance and context."],
+                faqs: [],
+                views: 0,
+                minutes: 3,
+                date: new Date().toISOString().split('T')[0],
+                internalLinks: []
+            });
+            renderArticles();
+            renderTrending();
+            stylishToast('Draft queued for approval');
+        });
+
+        renderNav();
+        renderFilters();
+        renderArticles();
+        renderTrending();
+        renderLog();
+        renderAffiliates();
+        renderTimeline();
+        document.getElementById('statRevenue').textContent = "$640";
+
+        const schemaData = {
+            "@context": "https://schema.org",
+            "@type": "NewsMediaOrganization",
+            "name": "QuizPulse 360",
+            "url": "https://quizpulse360.com",
+            "description": "AI-assisted GK, current affairs, and education newsroom.",
+            "founder": "Knowledge Grid Labs",
+            "foundingDate": "2024-05-10",
+            "sameAs": ["https://twitter.com/quizpulse", "https://www.linkedin.com/company/quizpulse360/"]
+        };
+        const schemaScript = document.createElement('script');
+        schemaScript.type = "application/ld+json";
+        schemaScript.textContent = JSON.stringify(schemaData);
+        document.head.appendChild(schemaScript);
+    </script>
+</body>
+</html>
